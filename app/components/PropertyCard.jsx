@@ -49,7 +49,7 @@ export function PropertyCard({ property }) {
         <div className="flex items-center justify-between pt-2 border-t">
           <div className="flex items-center gap-2">
             <Image
-              src={property.owner.avatar || "/placeholder.svg"}
+              src={property.owner.avatar || "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=40"}
               alt={property.owner.name}
               width={40}
               height={40}

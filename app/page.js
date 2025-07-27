@@ -45,7 +45,7 @@ const properties = [
   price: 750000,
   period: "/Year",
   status: "For Rent",
-  image: "/public/image.png",
+  image: "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=400",
   bedrooms: 4,
   bathrooms: 4,
   features: 4,
@@ -53,7 +53,7 @@ const properties = [
   owner: {
    name: "Tee Tops",
    role: "Property Owner",
-   avatar: "/placeholder.svg?height=40&width=40",
+   avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=40",
   },
  },
 ]

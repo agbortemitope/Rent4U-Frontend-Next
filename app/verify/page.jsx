@@ -61,7 +61,7 @@ export default function VerifyIdentity() {
                 {preview ? (
                   <div className="absolute inset-0 w-full h-full">
                     <img
-                      src={preview || "/placeholder.svg"}
+                      src={preview || "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200"}
                       alt="Preview"
                       className="w-full h-full object-contain rounded-lg"
                     />
