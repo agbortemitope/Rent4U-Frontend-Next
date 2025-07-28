@@ -59,6 +59,12 @@ export default function Header() {
 							</Link>
 						)}
 
+						{user && (
+							<Link href="/wallet" className="text-gray-700 hover:text-[#3730E1]">
+								Wallet
+							</Link>
+						)}
+
 						{!user && <DropdownMenu trigger="Register" items={registerItems} />}
 
 						{user ? (
@@ -83,6 +89,15 @@ export default function Header() {
 			{isMobileMenuOpen && (
 				<div className="md:hidden">
 					<div className="px-2 pt-2 pb-3 space-y-1">
+						{user && (
+							<Link
+								href="/wallet"
+								className="block px-3 py-2 text-gray-700 hover:text-[#3730E1] hover:bg-gray-50 rounded-md"
+							>
+								Wallet
+							</Link>
+						)}
+
 						<Link
 							href="/manage-rentals"
 							className="block px-3 py-2 text-gray-700 hover:text-[#3730E1] hover:bg-gray-50 rounded-md"
@@ -98,11 +113,13 @@ export default function Header() {
 							<DropdownMenu trigger="Login" items={loginItems} className="relative" />
 						</div>
 
-						<div className="px-3 py-2">
+						{user && userProfile?.user_type === 'owner' && (
+							<div className="px-3 py-2">
 							<Button href="/add-property" className="w-full">
 								Add property
 							</Button>
-						</div>
+							</div>
+						)}
 					</div>
 				</div>
 			)}
