@@ -3,11 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { useAuth } from "../contexts/AuthContext"
 import { Button } from "./ui/button"
 import { DropdownMenu } from "./ui/dropdown-menu"
 
 export default function Header() {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+	const { user, userProfile, signOut } = useAuth()
 
 	const registerItems = [
 		{ label: "As Renter", href: "/signup" },
@@ -19,6 +21,11 @@ export default function Header() {
 		{ label: "As Owner", href: "/login" },
 	]
 
+	const userMenuItems = user ? [
+		{ label: "Dashboard", href: "/dashboard" },
+		{ label: "Profile", href: "/profile" },
+		{ label: "Sign Out", onClick: signOut },
+	] : []
 	return (
 		<nav className="bg-white border-b">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,17 +53,28 @@ export default function Header() {
 
 					{/* Desktop menu */}
 					<div className="hidden md:flex md:items-center md:space-x-8">
-						<Link href="/manage-rentals" className="text-gray-700 hover:text-[#3730E1]">
-							Manage Rentals
-						</Link>
+						{user && userProfile?.user_type === 'owner' && (
+							<Link href="/manage-rentals" className="text-gray-700 hover:text-[#3730E1]">
+								Manage Rentals
+							</Link>
+						)}
 
-						<DropdownMenu trigger="Register" items={registerItems} />
+						{!user && <DropdownMenu trigger="Register" items={registerItems} />}
 
-						<DropdownMenu trigger="Login" items={loginItems} />
+						{user ? (
+							<DropdownMenu 
+								trigger={`Hi, ${userProfile?.first_name || 'User'}`} 
+								items={userMenuItems} 
+							/>
+						) : (
+							<DropdownMenu trigger="Login" items={loginItems} />
+						)}
 
-						<Link href="/manage-rentals" className="text-gray-700 hover:text-[#3730E1]">
-							Add property
-						</Link>
+						{user && userProfile?.user_type === 'owner' && (
+							<Link href="/properties/add" className="text-gray-700 hover:text-[#3730E1]">
+								Add property
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>

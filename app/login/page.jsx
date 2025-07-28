@@ -21,6 +21,7 @@ const SocialIconButton = ({ fb, onClick, children }) => (
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [loginAs, setLoginAs] = useState("")
+  const { signInWithGoogle } = useAuth()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,8 +42,12 @@ export default function Login() {
   }
 
   const handleSocialLogin = (provider) => {
-    // TODO: Implement social login
-    console.log(`${provider} login clicked`)
+    if (provider === 'google') {
+      signInWithGoogle()
+    } else {
+      // TODO: Implement other social logins
+      console.log(`${provider} login clicked`)
+    }
   }
   const LoginComponent = () => {
 

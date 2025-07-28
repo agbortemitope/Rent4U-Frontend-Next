@@ -9,12 +9,14 @@ import Button from "../components/Button"
 import Input from "../components/Input"
 import { Card } from "../components/Card"
 import { useRouter } from "next/navigation"
+import { useAuth } from "../contexts/AuthContext"
 
 
 export default function SignupPage() {
   const [step, setStep] = useState(1)
   const [signupAs, setSignupAs] = useState("")
   const router = useRouter()
+  const { signInWithGoogle } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
@@ -61,8 +63,12 @@ export default function SignupPage() {
   }
 
   const handleSocialLogin = (provider) => {
-    // TODO: Implement social login
-    console.log(`${provider} login clicked`)
+    if (provider === 'google') {
+      signInWithGoogle()
+    } else {
+      // TODO: Implement other social logins
+      console.log(`${provider} login clicked`)
+    }
   }
 
   const RenterForm = () => {

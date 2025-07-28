@@ -1,7 +1,9 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@supabase/supabase-js'
 
-export const supabase = createClientComponentClient()
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-project.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-anon-key'
 
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 // Property management functions
 export const createProperty = async (propertyData) => {
   const { data, error } = await supabase
